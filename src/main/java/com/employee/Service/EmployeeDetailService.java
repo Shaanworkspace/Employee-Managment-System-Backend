@@ -5,6 +5,8 @@ import com.employee.Repository.EmployeeDetailRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class EmployeeDetailService {
@@ -12,6 +14,10 @@ public class EmployeeDetailService {
 
     public EmployeeDetails AddEmployee(EmployeeDetails employeeDetails){
         return employeeDetailRepo.save(employeeDetails);
+    }
+
+    public List<EmployeeDetails> getEmployee(){
+        return employeeDetailRepo.findAll();
     }
 
 }
