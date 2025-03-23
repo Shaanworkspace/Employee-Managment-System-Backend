@@ -12,7 +12,6 @@ import java.util.List;
 @RequestMapping("/emp")
 @RequiredArgsConstructor //Will take only private final or @NONNull
 public class EmployeeDetailsController {
-
     private final EmployeeDetailService employeeDetailService;
 
     //Add an Employee
