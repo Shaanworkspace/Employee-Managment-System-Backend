@@ -23,7 +23,6 @@ public class EmployeeDetails {
     @Column(name = "Name")
     private String name;
 
-
     @Column(name = "Email",unique = true)
     private String email;
 
