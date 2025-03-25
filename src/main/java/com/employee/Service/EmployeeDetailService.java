@@ -1,15 +1,19 @@
 package com.employee.Service;
 
 import com.employee.Entity.EmployeeDetails;
+import com.employee.Entity.UserPrincipal;
 import com.employee.Repository.EmployeeDetailRepo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class EmployeeDetailService {
+public class EmployeeDetailService implements UserDetailsService {
     private final EmployeeDetailRepo employeeDetailRepo;
 
     public EmployeeDetails AddEmployee(EmployeeDetails employeeDetails){
@@ -20,4 +24,13 @@ public class EmployeeDetailService {
         return employeeDetailRepo.findAll();
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        EmployeeDetails employeeDetails = employeeDetailRepo.getEmployeeDetailsByEmail(username);
+        if(employeeDetails == null){
+            System.out.println("User Not Found");
+            throw new UsernameNotFoundException("User Not found. Please Search with correct Credentials");
+        }
+        return new UserPrincipal(employeeDetails);
+    }
 }

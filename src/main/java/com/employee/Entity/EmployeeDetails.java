@@ -7,7 +7,13 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "employee_details")
+@Table(
+        name = "employee_details",
+        uniqueConstraints = {
+                @UniqueConstraint(columnNames = "Email"),  // Ensures unique emails
+                @UniqueConstraint(columnNames = "Phone")   // Ensures unique phone numbers
+        }
+)
 public class EmployeeDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,13 +23,14 @@ public class EmployeeDetails {
     @Column(name = "Name")
     private String name;
 
-    @Column(name = "Email")
+
+    @Column(name = "Email",unique = true)
     private String email;
 
     @Column(name = "Department")
     private String department;
 
-    @Column(name = "Phone")
+    @Column(name = "Phone",unique = true)
     private String phone;
 
     @Column(name = "Password")
