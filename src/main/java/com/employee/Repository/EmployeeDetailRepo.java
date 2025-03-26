@@ -9,4 +9,5 @@ public interface EmployeeDetailRepo extends JpaRepository<EmployeeDetails,Long> 
     EmployeeDetails getEmployeeDetailsByPhone(String phone);
     EmployeeDetails getEmployeeDetailsByEmpId(long empId);
     EmployeeDetails getEmployeeDetailsByEmail(String email);
+
 }

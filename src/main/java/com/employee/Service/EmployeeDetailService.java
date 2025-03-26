@@ -35,6 +35,7 @@ public class EmployeeDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         EmployeeDetails employeeDetails = employeeDetailRepo.getEmployeeDetailsByEmail(username);
+
         if(employeeDetails == null){
             System.out.println("User Not Found");
             throw new UsernameNotFoundException("User Not found. Please Search with correct Credentials");
