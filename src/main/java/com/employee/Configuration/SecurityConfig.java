@@ -33,10 +33,11 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("emp/login","emp/register")
-                        .permitAll()
+                        .requestMatchers("emp/login","emp/register").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")  // Without "ROLE_" because Spring adds it internally
                         .anyRequest()
-                        .authenticated())
+                        .authenticated()
+                )
                 .httpBasic(Customizer.withDefaults())
                 .sessionManagement(session->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

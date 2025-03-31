@@ -35,11 +35,10 @@ public class JWTService {
     public String generateKey(String username) {
         Map<String,Object> claims = new HashMap<>();
         return Jwts.builder()
-            .claims()
-                .add(claims)
+            .claims().add(claims)
             .subject(username)
             .issuedAt(new Date(System.currentTimeMillis()))
-            .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 10))
+            .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 60 * 10))
             .and()
             .signWith(getSignatureKey())
             .compact();

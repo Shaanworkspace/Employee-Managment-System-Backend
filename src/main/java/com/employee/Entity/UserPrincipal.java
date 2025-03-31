@@ -18,7 +18,17 @@ public class UserPrincipal implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singleton(new SimpleGrantedAuthority("USER"));
+        String role = employeeDetails.getRole();
+
+        // Ensure the role has "ROLE_" prefix (Spring Security convention)
+        if (!role.startsWith("ROLE_")) {
+            role = "ROLE_" + role.toUpperCase();
+        }
+
+        return Collections.singleton(new SimpleGrantedAuthority(role));
+    }
+    public String getRole(){
+        return employeeDetails.getRole();
     }
 
     @Override

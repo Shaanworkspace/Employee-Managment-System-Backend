@@ -38,4 +38,7 @@ public class EmployeeDetails {
     // One employee can have multiple tasks
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL,orphanRemoval = true)
     private List<TaskDetails> tasks;
+
+    @Column(name="Role")
+    private String role = "user";
 }
